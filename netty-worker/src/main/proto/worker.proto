@@ -1,0 +1,19 @@
+syntax = "proto3";
+package proto;
+option java_package = "org.example.worker";
+option java_multiple_files = true;
+
+
+message TaskRequest{
+  int64 offset=1;
+  string message=2;
+}
+
+message TaskResponse{
+  int64 offset=1;
+  string status=2;
+}
+
+service WorkerService{
+  rpc execute(TaskRequest) returns (TaskResponse);
+}

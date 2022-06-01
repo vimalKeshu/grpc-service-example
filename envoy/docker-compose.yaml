@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  envoy:
+    build:
+      context: .
+    container_name: "envoy"
+    image: "envoy:v1"
+    ports:
+    - "9901:9901"
+    - "8181:8080"
+  worker:
+    build: 
+      context: /Users/vimal.chaudhari/Documents/git/netty-worker/
+    image: "netty-worker:1.0"
+    #container_name: "netty-worker"
+    environment:
+      - WORKER_SERVICE_PORT=8080
+    ports:
+    - "8080"
+    deploy:
+      replicas: 3
